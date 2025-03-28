@@ -1,6 +1,8 @@
 //TO-Do: 
   //render added contacts and deleted ones without refresh
   //write a test
+  //add astrology API 
+  //fetch with view more matching on the sign name from the starSign
   
 
 import { useState, useEffect } from 'react'
@@ -15,10 +17,11 @@ function App() {
   const [contacts, setContacts] = useState([]);
   const [findContact, setFindContact] = useState([]);
   const [errorHandle, setErrorHandle] = useState(false);
-  const [starSign, setStarSign] = useState([]);
+  const [starSign, setStarSign] = useState(null);
   const [selectedBirthday, setSelectedBirthday] = useState(null);
   const [isViewMoreOpen, setIsViewMoreOpen] = useState(false);
   const [searchResult, setSearchResult] = useState("");
+  const [starSignInfo, setStarSignInfo] = useState("");
 
 
   const handleViewMoreClick = (birthday) => {
@@ -59,7 +62,8 @@ function App() {
       const data = await res.json();
       console.log("fetched data: ", data)
 
-      setStarSign(prev => [...prev, {birthday, sign: data[0]?.sign_sign || "Unknown"}]);
+      // setStarSign(prev => [...prev, {birthday, sign: data[0]?.sign_sign || "Unknown"}]);
+      setStarSign(data);
     } catch(error) {
       console.error("Error fetching starsign: ", error);
       //setErrorHandle(true); //to build out an error component 

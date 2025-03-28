@@ -13,8 +13,10 @@ function ViewContact({ findContact, starSign, deleteContact, selectedBirthday, i
   const [editNotes, setEditNotes] = useState("");
   const [isEditOpen, setisEditOpen] = useState(false);
   const [selectedContact, setSelectedContact] = useState(null);
+
+  console.log("star sign from view contact component", starSign);
   
-  if(!Array.isArray(findContact) || findContact.length === 0 ){
+  if(!Array.isArray(findContact) || findContact.length === 0 || !Array.isArray(starSign) || starSign.length === 0 ){
     return;
   }
   const handleEditClick = (contact) => {
@@ -48,10 +50,10 @@ function ViewContact({ findContact, starSign, deleteContact, selectedBirthday, i
     const date = new Date(birthday);
     return date.toLocaleDateString('en-CA');
   };
-  // const signsForContact = (birthday) => {
-  //   const sign = starSign.find(item => item.birthday === birthday);
-  //   return sign ? sign.star_sign : "unknown"
-  // }
+  const signsForContact = (birthday) => {
+    const sign = starSign.find(item => item.birthday === birthday);
+    return sign ? sign.star_sign : "unknown"
+  }
   return isViewMoreOpen ? ( //set the state of the contact being open as a conditional 
     <div className="card">
       {findContact.map((contact) => 
@@ -68,9 +70,9 @@ function ViewContact({ findContact, starSign, deleteContact, selectedBirthday, i
         <p>Phone: {contact.phone}</p>
         <p>Notes: {contact.notes}</p>
         <p>Birthday: {formatBirthday(contact.birthday)}</p>
-        {/* {selectedBirthday === contact.birthday && (
+         {selectedBirthday === contact.birthday && (
           <p>star sign: {signsForContact(contact.birthday)}</p>
-        )} */}
+        )} 
           {isEditOpen && selectedContact?.contact_id === contact.contact_id && (
               <div className="modal">
                 <h3>edit notes</h3>

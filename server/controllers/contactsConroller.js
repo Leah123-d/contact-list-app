@@ -19,9 +19,10 @@ export const getstarsign = async(req,res) => {
   try{
     const result = await dbConnection.query(`SELECT contacts.birthday, contacts.name, starsign.star_sign 
                                             FROM contacts 
-                                            FULL JOIN starsign ON DATE(contacts.birthday) BETWEEN DATE(starsign.start_date) 
+                                            INNER JOIN starsign 
+                                            ON DATE(contacts.birthday) BETWEEN DATE(starsign.start_date) 
                                             AND DATE(starsign.end_date) 
-                                            WHERE DATE(contacts.birthday) = $1::DATE`, [birthday]);
+                                            WHERE DATE(contacts.birthday) = $1::DATE LIMIT 1`, [birthday]);
     if(result.rows.length === 0){
       return res.send({ "error": "contact not found" });
     }
