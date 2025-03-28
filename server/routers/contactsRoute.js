@@ -7,6 +7,7 @@ import{
   updateContact,
   deleteContact,
   searchContacts,
+  getHoroscope,
 } from '../controllers/contactsConroller.js';
 
 const router = express.Router();

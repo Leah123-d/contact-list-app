@@ -1,5 +1,7 @@
 import dbConnection from '../db-connection.js';
 
+const {APIKEY} = process.env;
+
 export const getContact = async(req,res) => {
   const { contact_id } = req.params;
   try{
@@ -19,9 +21,10 @@ export const getstarsign = async(req,res) => {
   try{
     const result = await dbConnection.query(`SELECT contacts.birthday, contacts.name, starsign.star_sign 
                                             FROM contacts 
-                                            FULL JOIN starsign ON DATE(contacts.birthday) BETWEEN DATE(starsign.start_date) 
+                                            INNER JOIN starsign 
+                                            ON DATE(contacts.birthday) BETWEEN DATE(starsign.start_date) 
                                             AND DATE(starsign.end_date) 
-                                            WHERE DATE(contacts.birthday) = $1::DATE`, [birthday]);
+                                            WHERE DATE(contacts.birthday) = $1::DATE LIMIT 1`, [birthday]);
     if(result.rows.length === 0){
       return res.send({ "error": "contact not found" });
     }
@@ -93,5 +96,35 @@ export const searchContacts = async(req,res) => {
   res.json(result.rows);
   }catch (error){
   console.error('no contact found', error);
+  }
+}
+
+export const getHoroscope = async(req,res) => {
+
+  console.log("recied body", req.body);
+
+  const { star_sign } = req.params;
+
+  if(!star_sign) {
+    return res.status(400).json({error: "sign is required"});
+  }
+
+  try{
+    const reponse = await fetch('https://divineapi.com/api/1.0/get_weekly_horoscope.php',{
+      method: 'POST',
+      headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        star_sign,
+        api_key: {APIKEY}, // put key in .env and place variable here 
+        week:'current'
+      })
+    });
+
+    const data = await response.json();
+    res.json(data);
+
+  } catch(error){
+    console.error("error fetching horoscope:", error);
+    res.status(500).json({error: "internal server error"})
   }
 }
