@@ -84,8 +84,15 @@ For Frontend
 
 ## Future Implementation: 
 
+[ ] enchance CSS features 
+[ ] include icons for starsign information
+[ ] connect to an API to display horoscope information
+
+
 
 
 ## Project Preview: 
+![contact-list-app](https://github.com/user-attachments/assets/8b079988-af40-48f4-b41e-5c7efabc1394)
+
 
 
