@@ -21,7 +21,7 @@ function App() {
   const [selectedBirthday, setSelectedBirthday] = useState(null);
   const [isViewMoreOpen, setIsViewMoreOpen] = useState(false);
   const [searchResult, setSearchResult] = useState("");
-  const [starSignInfo, setStarSignInfo] = useState("");
+
 
 
   const handleViewMoreClick = (birthday) => {
@@ -70,7 +70,6 @@ function App() {
       return [];
     }
   };
-
 
   const createNewContact = async(formData)=>{// I think I can pass the state of the contact instead of the event?
     console.log("contact submitted:", formData);

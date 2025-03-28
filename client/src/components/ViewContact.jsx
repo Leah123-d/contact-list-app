@@ -9,12 +9,11 @@ import { IoClose } from "react-icons/io5";
 import { MdDoneOutline } from "react-icons/md";
 
 
-function ViewContact({ findContact, starSign, deleteContact, selectedBirthday, isViewMoreOpen, setIsViewMoreOpen }){
+function ViewContact({ findContact, starSign, deleteContact, selectedBirthday, isViewMoreOpen, setIsViewMoreOpen, starSignInfo }){
   const [editNotes, setEditNotes] = useState("");
   const [isEditOpen, setisEditOpen] = useState(false);
   const [selectedContact, setSelectedContact] = useState(null);
 
-  console.log("star sign from view contact component", starSign);
   
   if(!Array.isArray(findContact) || findContact.length === 0 || !Array.isArray(starSign) || starSign.length === 0 ){
     return;
