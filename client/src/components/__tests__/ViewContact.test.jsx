@@ -10,7 +10,7 @@ afterEach(() => {
   jest.resetAllMocks();
 });
 
-test("should open edit for choosen contact", async () => {
+test("should open edit for chosen contact", async () => {
   //also, any props that will impact rendering the component will need to be mocked
   const mockfindContact = [{
     contact_id: 1,
