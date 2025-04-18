@@ -1,6 +1,6 @@
 //To-Do
   //refactor to handle form validation in useReducer
-
+import React from 'react';
 import { useReducer, useRef } from "react";
 
 const initialState = { name: "", email: "", phone: "", notes: "", birthday: ""}; //intial start for states

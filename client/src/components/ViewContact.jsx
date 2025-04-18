@@ -1,7 +1,4 @@
-//to-do: 
-//fix the getsign function to get the correct starsign
-//if we can get the right star sign, maybe we can display an API information?
-
+import React from "react";
 import { useState } from 'react'
 import { TfiTrash } from "react-icons/tfi";
 import { SlPencil } from "react-icons/sl";
@@ -60,7 +57,7 @@ function ViewContact({ findContact, starSign, deleteContact, selectedBirthday, i
       <div key={contact.contact_id}>
         <h1>
           <span className="icon">
-            <button className="editButton" onClick={() => handleEditClick(contact)}><SlPencil /></button>
+            <button aria-label="Edit Contact" className="editButton"  onClick={() => handleEditClick(contact)}><SlPencil /></button>
           </span>
           {contact.name}
         </h1>
